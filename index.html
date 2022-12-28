@@ -63,7 +63,7 @@
                 }
 
 
-                //////save user on crud crud
+                                      //////save user on crud crud
             axios.post("https://crudcrud.com/api/84c0030461174bfbb7b4b43ed9ac7b1f/appointmentData", obj)
         .then((responce) => {
             showNewUserOnScreen(responce.data);
@@ -76,17 +76,32 @@
                 // localStorage.setItem(obj.email, JSON.stringify(obj))
                 // showNewUserOnScreen(obj)
             }
+            
 
+                                      ///get save user 
             window.addEventListener("DOMContentLoaded", () => {
-                const localStorageObj = localStorage;
-                const localstoragekeys  = Object.keys(localStorageObj)
 
-                for(var i =0; i< localstoragekeys.length; i++){
-                    const key = localstoragekeys[i]
-                    const userDetailsString = localStorageObj[key];
-                    const userDetailsObj = JSON.parse(userDetailsString);
-                    showNewUserOnScreen(userDetailsObj)
-                }
+                 axios.get("https://crudcrud.com/api/84c0030461174bfbb7b4b43ed9ac7b1f/appointmentData")
+                 .then((responce)=>{
+                    console.log(responce)
+                    for(var i =0;i<responce.data.length;i++){
+                        showNewUserOnScreen(responce.data[i]);
+                    }
+                               
+                 }).catch((error) =>{
+                    console.log(errror)
+
+                 })
+
+                // const localStorageObj = localStorage;
+                // const localstoragekeys  = Object.keys(localStorageObj)
+
+                // for(var i =0; i< localstoragekeys.length; i++){
+                //     const key = localstoragekeys[i]
+                //     const userDetailsString = localStorageObj[key];
+                //     const userDetailsObj = JSON.parse(userDetailsString);
+                //     showNewUserOnScreen(userDetailsObj)
+                // }
             })
 
             function showNewUserOnScreen(user){
